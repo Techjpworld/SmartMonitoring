@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ModernSolutions & Automation | Smart Industrial Monitoring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ===========================
+   CSS CUSTOM PROPERTIES
+=========================== */
+:root {
+  --navy: #0a1628;
+  --navy-mid: #0f2044;
+  --blue: #1a6bff;
+  --blue-glow: #2979ff;
+  --cyan: #00d4ff;
+  --steel: #1e3a5f;
+  --slate: #263d5a;
+  --text-primary: #e8f0fe;
+  --text-secondary: #8faac8;
+  --text-muted: #5a7a9a;
+  --border: rgba(26,107,255,0.2);
+  --border-glow: rgba(0,212,255,0.3);
+  --card-bg: rgba(15,32,68,0.8);
+  --card-border: rgba(26,107,255,0.15);
+  --success: #00e5a0;
+  --warning: #ffb800;
+  --font-display: 'Rajdhani', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-blue: 0 0 40px rgba(26,107,255,0.15);
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+/* ===========================
+   RESET & BASE
+=========================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--navy);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Scanline texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===========================
+   UTILITY CLASSES
+=========================== */
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  border: 1px solid rgba(0,212,255,0.3);
+  padding: 6px 14px;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+
+.section-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--cyan);
+  border-radius: 50%;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  max-width: 600px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 14px 32px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 0 24px rgba(26,107,255,0.4);
+}
+
+.btn-primary:hover {
+  background: var(--blue-glow);
+  box-shadow: 0 0 40px rgba(26,107,255,0.6);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--cyan);
+  border: 1px solid var(--cyan);
+}
+
+.btn-outline:hover {
+  background: rgba(0,212,255,0.1);
+  box-shadow: 0 0 20px rgba(0,212,255,0.2);
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+#navbar.scrolled {
+  background: rgba(10,22,40,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-blue);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.nav-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.nav-logo-main {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.nav-logo-sub {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--cyan);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.nav-logo .accent { color: var(--blue); }
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.nav-menu a {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav-menu a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--cyan);
+  transition: var(--transition);
+}
+
+.nav-menu a:hover { color: #fff; }
+.nav-menu a:hover::after { width: 100%; }
+
+.nav-cta {
+  background: var(--blue) !important;
+  color: #fff !important;
+  padding: 8px 20px;
+  border-radius: 2px;
+  box-shadow: 0 0 16px rgba(26,107,255,0.3);
+}
+
+.nav-cta:hover {
+  background: var(--blue-glow) !important;
+  box-shadow: 0 0 28px rgba(26,107,255,0.5) !important;
+  transform: none;
+}
+
+.nav-cta::after { display: none !important; }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  width: 24px; height: 2px;
+  background: var(--text-primary);
+  transition: var(--transition);
+  display: block;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 72px; left: 0; right: 0;
+  background: rgba(10,22,40,0.98);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  z-index: 999;
+  padding: 20px 24px;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.mobile-menu a:hover { color: var(--cyan); }
+.mobile-menu a:last-child { border-bottom: none; }
+
+/* ===========================
+   HERO SECTION
+=========================== */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 80px;
+}
+
+/* Animated grid background */
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(26,107,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,107,255,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: grid-drift 20s linear infinite;
+}
+
+@keyframes grid-drift {
+  0% { background-position: 0 0; }
+  100% { background-position: 60px 60px; }
+}
+
+/* Glow orbs */
+#hero::after {
+  content: '';
+  position: absolute;
+  top: 20%; left: 60%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(26,107,255,0.12) 0%, transparent 70%);
+  pointer-events: none;
+  animation: orb-float 8s ease-in-out infinite;
+}
+
+@keyframes orb-float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-30px, 20px); }
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.25);
+  border-radius: 2px;
+  padding: 8px 16px;
+  margin-bottom: 28px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--cyan);
+  letter-spacing: 0.1em;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+}
+
+.hero-badge-dot {
+  width: 8px; height: 8px;
+  background: var(--cyan);
+  border-radius: 50%;
+  animation: live-blink 1.5s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--cyan);
+}
+
+@keyframes live-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 24px;
+}
+
+.hero-title .highlight {
+  color: var(--cyan);
+  position: relative;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  max-width: 520px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.hero-stat {
+  padding: 20px;
+  border: 1px solid var(--card-border);
+  border-left: 3px solid var(--blue);
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+}
+
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.hero-stat-num span { color: var(--cyan); }
+
+.hero-stat-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+
+/* Dashboard mockup */
+.hero-visual {
+  position: relative;
+}
+
+.dashboard-frame {
+  background: var(--navy-mid);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--shadow-card), 0 0 60px rgba(26,107,255,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-frame::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+}
+
+.dash-topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.dash-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+
+.dash-dot:nth-child(1) { background: #ff5f57; }
+.dash-dot:nth-child(2) { background: #ffbd2e; }
+.dash-dot:nth-child(3) { background: #27c93f; }
+
+.dash-title {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  margin-left: 8px;
+}
+
+.dash-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.dash-metric {
+  background: rgba(10,22,40,0.7);
+  border: 1px solid var(--card-border);
+  padding: 14px;
+  border-radius: 4px;
+}
+
+.dash-metric-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.dash-metric-value {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.dash-metric-value.ok { color: var(--success); }
+.dash-metric-value.warn { color: var(--warning); }
+.dash-metric-value.cyan { color: var(--cyan); }
+
+.dash-chart {
+  background: rgba(10,22,40,0.7);
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.dash-chart-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 60px;
+}
+
+.chart-bar {
+  flex: 1;
+  background: linear-gradient(180deg, var(--blue), rgba(26,107,255,0.3));
+  border-radius: 2px 2px 0 0;
+  animation: bar-grow 1s ease-out;
+}
+
+@keyframes bar-grow {
+  from { transform: scaleY(0); transform-origin: bottom; }
+  to { transform: scaleY(1); transform-origin: bottom; }
+}
+
+.dash-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dash-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.dash-alert.ok { background: rgba(0,229,160,0.1); color: var(--success); border: 1px solid rgba(0,229,160,0.2); }
+.dash-alert.warn { background: rgba(255,184,0,0.1); color: var(--warning); border: 1px solid rgba(255,184,0,0.2); }
+
+.alert-icon { font-size: 1rem; }
+
+/* ===========================
+   SERVICES SECTION
+=========================== */
+#services {
+  padding: 100px 0;
+  position: relative;
+}
+
+#services::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.services-header .section-subtitle {
+  margin: 0 auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.service-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  padding: 36px 28px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  backdrop-filter: blur(10px);
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 0;
+  background: linear-gradient(180deg, rgba(26,107,255,0.08), transparent);
+  transition: height 0.4s ease;
+}
+
+.service-card:hover {
+  border-color: rgba(26,107,255,0.4);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-blue), var(--shadow-card);
+}
+
+.service-card:hover::before { height: 100%; }
+
+.service-icon {
+  width: 60px; height: 60px;
+  background: rgba(26,107,255,0.12);
+  border: 1px solid rgba(26,107,255,0.25);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+  transition: var(--transition);
+}
+
+.service-card:hover .service-icon {
+  background: rgba(26,107,255,0.2);
+  border-color: var(--blue);
+  box-shadow: 0 0 20px rgba(26,107,255,0.3);
+}
+
+.service-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.service-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.service-features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.service-feature::before {
+  content: '▸';
+  color: var(--cyan);
+  font-size: 0.7rem;
+}
+
+/* ===========================
+   PRICING SECTION
+=========================== */
+#pricing {
+  padding: 100px 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(15,32,68,0.5) 50%, transparent 100%);
+  position: relative;
+}
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.pricing-header .section-subtitle { margin: 0 auto; }
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.pricing-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  padding: 36px 28px;
+  transition: var(--transition);
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.pricing-card.featured {
+  border-color: var(--blue);
+  box-shadow: var(--shadow-blue);
+  transform: scale(1.03);
+}
+
+.pricing-card.featured::before {
+  content: 'MOST POPULAR';
+  position: absolute;
+  top: -1px; left: 50%; transform: translateX(-50%);
+  background: var(--blue);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 5px 16px;
+  border-radius: 0 0 4px 4px;
+}
+
+.pricing-card:hover:not(.featured) {
+  border-color: rgba(26,107,255,0.35);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.plan-name {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.plan-setup {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.plan-setup .rupee { font-size: 1.4rem; color: var(--text-secondary); }
+
+.plan-setup-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.plan-monthly {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--cyan);
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.plan-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.plan-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.plan-feature-icon {
+  width: 18px; height: 18px;
+  background: rgba(0,229,160,0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  color: var(--success);
+  flex-shrink: 0;
+}
+
+/* ===========================
+   BOOKING SECTION
+=========================== */
+#book {
+  padding: 100px 0;
+  position: relative;
+}
+
+#book::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+}
+
+.book-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.book-info {
+  position: sticky;
+  top: 100px;
+}
+
+.book-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.book-info-icon {
+  width: 44px; height: 44px;
+  background: rgba(26,107,255,0.1);
+  border: 1px solid rgba(26,107,255,0.2);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.book-info-text h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.book-info-text p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Form */
+.booking-form {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+}
+
+.form-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.form-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group.full { grid-column: 1 / -1; }
+
+.form-group label {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(10,22,40,0.8);
+  border: 1px solid rgba(26,107,255,0.2);
+  border-radius: 3px;
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  transition: var(--transition);
+  outline: none;
+  width: 100%;
+  appearance: none;
+}
+
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a7a9a' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  cursor: pointer;
+}
+
+.form-group select option {
+  background: var(--navy-mid);
+  color: var(--text-primary);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(26,107,255,0.1);
+  background: rgba(10,22,40,0.95);
+}
+
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+  border-color: #ff4d4d;
+}
+
+.error-msg {
+  font-size: 0.75rem;
+  color: #ff6b6b;
+  display: none;
+}
+
+.error-msg.show { display: block; }
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.btn-submit {
+  width: 100%;
+  justify-content: center;
+  padding: 16px;
+  font-size: 1rem;
+  margin-top: 8px;
+}
+
+/* Success message */
+.success-message {
+  display: none;
+  background: rgba(0,229,160,0.08);
+  border: 1px solid rgba(0,229,160,0.25);
+  border-radius: 4px;
+  padding: 24px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.success-message.show { display: block; }
+
+.success-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+
+.success-message h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--success);
+  margin-bottom: 8px;
+}
+
+.success-message p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+/* ===========================
+   CONTACT SECTION
+=========================== */
+#contact {
+  padding: 100px 0 60px;
+  position: relative;
+}
+
+#contact::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.contact-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  padding: 32px 24px;
+  text-align: center;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+}
+
+.contact-card:hover {
+  border-color: rgba(26,107,255,0.35);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-blue);
+}
+
+.contact-card-icon {
+  font-size: 2.2rem;
+  margin-bottom: 16px;
+}
+
+.contact-card h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.contact-card p {
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 500;
+}
+
+.contact-card a {
+  color: var(--cyan);
+  transition: var(--transition);
+}
+
+.contact-card a:hover { color: #fff; }
+
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25d366;
+  color: #fff !important;
+  padding: 12px 28px;
+  border-radius: 3px;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: var(--transition);
+  margin-top: 8px;
+}
+
+.whatsapp-btn:hover {
+  background: #20b558;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37,211,102,0.3);
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer {
+  background: rgba(5,12,25,0.8);
+  border-top: 1px solid var(--border);
+  padding: 48px 0 24px;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 40px;
+}
+
+.footer-brand p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+  max-width: 300px;
+  line-height: 1.7;
+}
+
+.footer-col h4 {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.footer-links a:hover { color: var(--cyan); }
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-copyright {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.footer-tech {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.footer-tech span { color: var(--blue); }
+
+/* ===========================
+   FLOATING WHATSAPP
+=========================== */
+.float-whatsapp {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 998;
+  width: 56px; height: 56px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.float-whatsapp:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 30px rgba(37,211,102,0.6);
+}
+
+.float-whatsapp::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(37,211,102,0.3);
+  animation: wa-ring 2s ease-out infinite;
+}
+
+@keyframes wa-ring {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* ===========================
+   SCROLL ANIMATIONS
+=========================== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero-visual { display: none; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .pricing-card.featured { transform: none; }
+  .book-inner { grid-template-columns: 1fr; }
+  .book-info { position: static; }
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .nav-menu { display: none; }
+  .hamburger { display: flex; }
+  .services-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .booking-form { padding: 28px 20px; }
+}
+
+@media (max-width: 480px) {
+  .hero-actions { flex-direction: column; }
+  .hero-stats { grid-template-columns: 1fr; }
+  .btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===========================
+     NAVBAR
+=========================== -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <span class="nav-logo-main">Modern<span class="accent">Solutions</span></span>
+        <span class="nav-logo-sub">&amp; Automation</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#book" class="nav-cta">Book Now</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero" onclick="closeMobileMenu()">Home</a>
+  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#pricing" onclick="closeMobileMenu()">Pricing</a>
+  <a href="#book" onclick="closeMobileMenu()">Book Now</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+</div>
+
+<!-- ===========================
+     HERO
+=========================== -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <!-- Left: Content -->
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          ARM-Based IoT Platform — Live Monitoring
+        </div>
+        <h1 class="hero-title">
+          Monitor Your Water Tanks, Motors &amp; <span class="highlight">Energy</span> in Real-Time
+        </h1>
+        <p class="hero-subtitle">
+          ARM-based automation system with real-time alerts, cloud dashboard, and remote control — built for homes, industries, and farms.
+        </p>
+        <div class="hero-actions">
+          <a href="#book" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+            Book Installation
+          </a>
+          <a href="#services" class="btn btn-outline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12h6M12 9v6M12 3a9 9 0 100 18A9 9 0 0012 3z"/></svg>
+            Explore Services
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num">200<span>+</span></div>
+            <div class="hero-stat-label">Systems Installed</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">99<span>%</span></div>
+            <div class="hero-stat-label">Uptime Guaranteed</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">24<span>/7</span></div>
+            <div class="hero-stat-label">Support Available</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Dashboard Mockup -->
+      <div class="hero-visual">
+        <div class="dashboard-frame">
+          <div class="dash-topbar">
+            <div class="dash-dot"></div>
+            <div class="dash-dot"></div>
+            <div class="dash-dot"></div>
+            <span class="dash-title">SMART MONITOR — LIVE DASHBOARD</span>
+          </div>
+          <div class="dash-metrics">
+            <div class="dash-metric">
+              <div class="dash-metric-label">Tank Level</div>
+              <div class="dash-metric-value cyan">78%</div>
+            </div>
+            <div class="dash-metric">
+              <div class="dash-metric-label">Motor Status</div>
+              <div class="dash-metric-value ok">RUNNING</div>
+            </div>
+            <div class="dash-metric">
+              <div class="dash-metric-label">Power Usage</div>
+              <div class="dash-metric-value">3.2 kW</div>
+            </div>
+            <div class="dash-metric">
+              <div class="dash-metric-label">Temp Sensor</div>
+              <div class="dash-metric-value warn">42°C</div>
+            </div>
+          </div>
+          <div class="dash-chart">
+            <div class="dash-chart-label">Energy Consumption — Last 7 Days</div>
+            <div class="chart-bars">
+              <div class="chart-bar" style="height:45%"></div>
+              <div class="chart-bar" style="height:65%"></div>
+              <div class="chart-bar" style="height:50%"></div>
+              <div class="chart-bar" style="height:80%"></div>
+              <div class="chart-bar" style="height:60%"></div>
+              <div class="chart-bar" style="height:90%"></div>
+              <div class="chart-bar" style="height:70%"></div>
+            </div>
+          </div>
+          <div class="dash-alerts">
+            <div class="dash-alert ok">
+              <span class="alert-icon">✓</span> Tank refill cycle completed successfully
+            </div>
+            <div class="dash-alert warn">
+              <span class="alert-icon">⚠</span> Motor temp elevated — check ventilation
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     SERVICES
+=========================== -->
+<section id="services">
+  <div class="container">
+    <div class="services-header fade-up">
+      <div class="section-tag">What We Offer</div>
+      <h2 class="section-title">Industrial-Grade Monitoring Services</h2>
+      <p class="section-subtitle">ARM & PLC-based IoT solutions tailored for your specific needs — from single installations to full site automation.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card fade-up">
+        <div class="service-icon">💧</div>
+        <h3 class="service-name">Water Tank Monitoring</h3>
+        <p class="service-desc">Real-time ultrasonic level sensing for overhead/underground tanks. Auto motor control with overflow protection and SMS/app alerts.</p>
+        <ul class="service-features">
+          <li class="service-feature">ARM-based controller with ultrasonic level sensing</li>
+          <li class="service-feature">Auto pump ON/OFF at set thresholds</li>
+          <li class="service-feature">Overflow & dry-run protection</li>
+          <li class="service-feature">Mobile app live dashboard</li>
+        </ul>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">⚙️</div>
+        <h3 class="service-name">Motor Health Monitoring</h3>
+        <p class="service-desc">Continuous health tracking of pumps and motors. Detect temperature spikes, overcurrent, and vibration anomalies before they cause downtime.</p>
+        <ul class="service-features">
+          <li class="service-feature">Temperature & current sensing</li>
+          <li class="service-feature">Run-time hour logging</li>
+          <li class="service-feature">Fault detection with auto-shutdown</li>
+          <li class="service-feature">Predictive maintenance alerts</li>
+        </ul>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">⚡</div>
+        <h3 class="service-name">Energy Usage Tracking</h3>
+        <p class="service-desc">Monitor your electricity consumption in real-time. Identify wastage, track peak hours, and generate monthly usage reports automatically.</p>
+        <ul class="service-features">
+          <li class="service-feature">Smart energy meter with ARM-based data acquisition</li>
+          <li class="service-feature">kWh, voltage & current logging</li>
+          <li class="service-feature">Daily/monthly reports on WhatsApp</li>
+          <li class="service-feature">High consumption alerts</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     PRICING
+=========================== -->
+<section id="pricing">
+  <div class="container">
+    <div class="pricing-header fade-up">
+      <div class="section-tag">Transparent Pricing</div>
+      <h2 class="section-title">Choose Your Plan</h2>
+      <p class="section-subtitle">Simple one-time setup fee + low monthly subscription. No hidden charges, no long contracts.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- Basic -->
+      <div class="pricing-card fade-up">
+        <div class="plan-name">Basic Plan</div>
+        <div class="plan-setup"><span class="rupee">₹</span>3,000</div>
+        <div class="plan-setup-label">One-time setup fee</div>
+        <div class="plan-monthly">+ ₹500 / month</div>
+        <ul class="plan-features">
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> 1 Water Tank Sensor</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Basic Mobile Dashboard</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> WhatsApp Alerts</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Auto Motor Control</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Email Support</li>
+        </ul>
+        <a href="#book" class="btn btn-outline" style="width:100%;justify-content:center;">Get Started</a>
+      </div>
+
+      <!-- Standard (Featured) -->
+      <div class="pricing-card featured fade-up">
+        <div class="plan-name">Standard Plan</div>
+        <div class="plan-setup"><span class="rupee">₹</span>5,000</div>
+        <div class="plan-setup-label">One-time setup fee</div>
+        <div class="plan-monthly">+ ₹1,000 / month</div>
+        <ul class="plan-features">
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Tank + Motor Monitoring</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Cloud Dashboard (Web + App)</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> SMS + WhatsApp + App Alerts</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Energy Usage Reports</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Priority Phone Support</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Monthly Health Reports</li>
+        </ul>
+        <a href="#book" class="btn btn-primary" style="width:100%;justify-content:center;">Get Started</a>
+      </div>
+
+      <!-- Premium -->
+      <div class="pricing-card fade-up">
+        <div class="plan-name">Premium Plan</div>
+        <div class="plan-setup"><span class="rupee">₹</span>8,000</div>
+        <div class="plan-setup-label">One-time setup fee</div>
+        <div class="plan-monthly">+ ₹1,500 / month</div>
+        <ul class="plan-features">
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Full System (Tank+Motor+Energy)</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Custom Automation Rules</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Multi-Site Management</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Predictive Maintenance AI</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> 24/7 Dedicated Support</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> On-Site Quarterly Service</li>
+        </ul>
+        <a href="#book" class="btn btn-outline" style="width:100%;justify-content:center;">Get Started</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     BOOKING FORM
+=========================== -->
+<section id="book">
+  <div class="container">
+    <div class="book-inner">
+      <!-- Left: Info -->
+      <div class="book-info fade-up">
+        <div class="section-tag">Book Installation</div>
+        <h2 class="section-title">Schedule Your Installation Today</h2>
+        <p class="section-subtitle" style="margin-bottom:40px;">Fill in your details and our engineer will get in touch within 24 hours to confirm your slot.</p>
+
+        <div class="book-info-item">
+          <div class="book-info-icon">📍</div>
+          <div class="book-info-text">
+            <h4>On-Site Installation</h4>
+            <p>Our certified engineers visit your location for a clean, professional setup.</p>
+          </div>
+        </div>
+        <div class="book-info-item">
+          <div class="book-info-icon">🔧</div>
+          <div class="book-info-text">
+            <h4>Free Commissioning</h4>
+            <p>We test and commission the entire system before we leave.</p>
+          </div>
+        </div>
+        <div class="book-info-item">
+          <div class="book-info-icon">📱</div>
+          <div class="book-info-text">
+            <h4>App Onboarding Included</h4>
+            <p>We set up your mobile dashboard and walk you through usage.</p>
+          </div>
+        </div>
+        <div class="book-info-item">
+          <div class="book-info-icon">🛡️</div>
+          <div class="book-info-text">
+            <h4>6-Month Hardware Warranty</h4>
+            <p>All ARM controller units and sensors covered against hardware defects.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="fade-up">
+        <div class="booking-form">
+          <h3 class="form-title">Book Your Slot</h3>
+          <p class="form-subtitle">All fields marked * are required. We'll confirm via call/WhatsApp.</p>
+
+          <form id="bookingForm" novalidate>
+            <div class="form-grid">
+
+              <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" name="fullName" placeholder="e.g. Rajesh Kumar" required>
+                <span class="error-msg" id="fullName-error">Please enter your full name.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="e.g. 9876543210" required>
+                <span class="error-msg" id="phone-error">Please enter a valid 10-digit number.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="location">City / Village *</label>
+                <input type="text" id="location" name="location" placeholder="e.g. Patna, Bihar" required>
+                <span class="error-msg" id="location-error">Please enter your location.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="service">Service Type *</label>
+                <select id="service" name="service" required>
+                  <option value="">— Select a service —</option>
+                  <option value="Tank Monitoring">Water Tank Monitoring</option>
+                  <option value="Motor Monitoring">Motor Health Monitoring</option>
+                  <option value="Energy Tracking">Energy Usage Tracking</option>
+                  <option value="Full Package">Full Package (All 3)</option>
+                </select>
+                <span class="error-msg" id="service-error">Please select a service type.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="date">Preferred Date *</label>
+                <input type="date" id="date" name="date" required>
+                <span class="error-msg" id="date-error">Please select a preferred date.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="plan">Preferred Plan</label>
+                <select id="plan" name="plan">
+                  <option value="">— Select a plan (optional) —</option>
+                  <option value="Basic">Basic — ₹3000 + ₹500/mo</option>
+                  <option value="Standard">Standard — ₹5000 + ₹1000/mo</option>
+                  <option value="Premium">Premium — ₹8000 + ₹1500/mo</option>
+                </select>
+              </div>
+
+              <div class="form-group full">
+                <label for="message">Additional Message</label>
+                <textarea id="message" name="message" placeholder="Tell us about your setup, any special requirements, number of tanks/motors, site size, etc."></textarea>
+              </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-submit">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+              Book Now — Confirm My Slot
+            </button>
+          </form>
+
+          <!-- Success Message -->
+          <div class="success-message" id="successMessage">
+            <div class="success-icon">✅</div>
+            <h3>Booking Received!</h3>
+            <p>Your booking has been sent to the team via <strong style="color:var(--success);">WhatsApp</strong> and <strong style="color:var(--cyan);">Email</strong>. Our engineer will call you within 24 hours to confirm your slot.</p>
+            <p style="margin-top:10px;font-size:0.78rem;color:var(--text-muted);">If WhatsApp or email didn't open automatically, please allow pop-ups and try again.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     CONTACT
+=========================== -->
+<section id="contact">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;">
+      <div class="section-tag" style="justify-content:center;">Get In Touch</div>
+      <h2 class="section-title">We're Here to Help</h2>
+      <p class="section-subtitle" style="margin:0 auto 0;">Questions before booking? Reach out via call, email, or WhatsApp — we respond fast.</p>
+    </div>
+    <div class="contact-grid">
+
+      <div class="contact-card fade-up">
+        <div class="contact-card-icon">📞</div>
+        <h3>Phone</h3>
+        <p><a href="tel:+919999999999">+91 99999 99999</a></p>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:6px;">Mon–Sat, 9am – 6pm</p>
+      </div>
+
+      <div class="contact-card fade-up">
+        <div class="contact-card-icon">📧</div>
+        <h3>Email</h3>
+        <p><a href="/cdn-cgi/l/email-protection#d7bfb2bbbbb897bab8b3b2a5b9a4b8bba2a3beb8b9a4f9beb9"><span class="__cf_email__" data-cfemail="0169646d6d6e416c6e6564736f726e6d7475686e6f722f686f">[email&#160;protected]</span></a></p>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:6px;">Reply within 4 hours</p>
+      </div>
+
+      <div class="contact-card fade-up" style="display:flex;flex-direction:column;align-items:center;gap:0;">
+        <div class="contact-card-icon">💬</div>
+        <h3>WhatsApp</h3>
+        <p style="margin-bottom:14px;color:var(--text-muted);font-size:0.88rem;">Chat with us instantly</p>
+        <a href="https://wa.me/919999999999?text=Hi%2C%20I%20want%20to%20book%20an%20installation%20for%20Smart%20Monitor%20system." target="_blank" class="whatsapp-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.553 4.116 1.524 5.84L.057 23.273a.75.75 0 00.92.92l5.436-1.469A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.745 9.745 0 01-4.97-1.361l-.358-.212-3.707 1.003.976-3.619-.232-.374A9.75 9.75 0 1112 21.75z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <span class="nav-logo-main">Modern<span class="accent">Solutions</span></span>
+          <span class="nav-logo-sub">&amp; Automation</span>
+        </div>
+        <p>Delivering intelligent ARM & PLC-based IoT monitoring systems for water, power, and industrial automation across India.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#book">Book Now</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="#services">Tank Monitoring</a></li>
+          <li><a href="#services">Motor Health</a></li>
+          <li><a href="#services">Energy Tracking</a></li>
+          <li><a href="#pricing">View Pricing</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">© 2025 ModernSolutions &amp; Automation. All rights reserved.</p>
+      <p class="footer-tech">Powered by <span>ARM · PLC · Cloud IoT</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/919999999999?text=Hi%2C%20I%27m%20interested%20in%20your%20Smart%20Monitor%20installation%20service." target="_blank" class="float-whatsapp" title="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.553 4.116 1.524 5.84L.057 23.273a.75.75 0 00.92.92l5.436-1.469A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.745 9.745 0 01-4.97-1.361l-.358-.212-3.707 1.003.976-3.619-.232-.374A9.75 9.75 0 1112 21.75z"/></svg>
+</a>
+
+<!-- ===========================
+     JAVASCRIPT
+=========================== -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  /* ==============================
+     NAVBAR — Sticky + Hamburger
+  ============================== */
+  const navbar = document.getElementById('navbar');
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  // Sticky scroll effect
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Hamburger toggle
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+  }
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!navbar.contains(e.target) && !mobileMenu.contains(e.target)) {
+      closeMobileMenu();
+    }
+  });
+
+  /* ==============================
+     SET MIN DATE ON BOOKING FORM
+  ============================== */
+  const dateInput = document.getElementById('date');
+  if (dateInput) {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    dateInput.min = tomorrow.toISOString().split('T')[0];
+  }
+
+  /* ==============================
+     FORM VALIDATION & SUBMISSION
+  ============================== */
+  const form = document.getElementById('bookingForm');
+  const successMessage = document.getElementById('successMessage');
+
+  function showError(fieldId, show) {
+    const field = document.getElementById(fieldId);
+    const errMsg = document.getElementById(`${fieldId}-error`);
+    if (show) {
+      field.classList.add('error');
+      errMsg.classList.add('show');
+    } else {
+      field.classList.remove('error');
+      errMsg.classList.remove('show');
+    }
+  }
+
+  function validateField(field) {
+    const value = field.value.trim();
+    if (field.id === 'phone') {
+      const isValid = /^[6-9]\d{9}$/.test(value);
+      showError('phone', !isValid);
+      return isValid;
+    }
+    if (field.required && !value) {
+      showError(field.id, true);
+      return false;
+    }
+    if (field.id && document.getElementById(`${field.id}-error`)) {
+      showError(field.id, false);
+    }
+    return true;
+  }
+
+  // Live validation on blur
+  ['fullName', 'phone', 'location', 'service', 'date'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('blur', () => validateField(el));
+      el.addEventListener('input', () => {
+        if (el.classList.contains('error')) validateField(el);
+      });
+    }
+  });
+
+  // ── Configuration ──────────────────────────────────
+  const OWNER_EMAIL    = 'jaylife125@gmail.com';
+  const OWNER_WHATSAPP = '919461267139'; // country code + number, no +
+  // ────────────────────────────────────────────────────
+
+  // Form submit
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Validate all required fields
+    const requiredFields = ['fullName', 'phone', 'location', 'service', 'date'];
+    let isValid = true;
+
+    requiredFields.forEach(id => {
+      const field = document.getElementById(id);
+      if (!validateField(field)) isValid = false;
+    });
+
+    if (!isValid) {
+      const firstError = form.querySelector('.error');
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Collect form data
+    const fd = {
+      fullName    : document.getElementById('fullName').value.trim(),
+      phone       : document.getElementById('phone').value.trim(),
+      location    : document.getElementById('location').value.trim(),
+      serviceType : document.getElementById('service').value,
+      plan        : document.getElementById('plan').value || 'Not selected',
+      preferredDate: document.getElementById('date').value,
+      message     : document.getElementById('message').value.trim() || '—',
+      submittedAt : new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+    };
+
+    console.log('===== NEW BOOKING REQUEST =====');
+    console.table(fd);
+    console.log('================================');
+
+    /* ── 1. EMAIL via mailto ─────────────────────────
+       Opens the user's default mail app pre-filled.
+       Subject + body are URL-encoded automatically.   */
+    const emailSubject = `New Booking: ${fd.serviceType} — ${fd.fullName}`;
+    const emailBody =
+`New booking received from ModernSolutions & Automation website.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  BOOKING DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Name          : ${fd.fullName}
+Phone         : ${fd.phone}
+Location      : ${fd.location}
+Service Type  : ${fd.serviceType}
+Preferred Plan: ${fd.plan}
+Preferred Date: ${fd.preferredDate}
+Submitted At  : ${fd.submittedAt}
+
+Message:
+${fd.message}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Please call the customer within 24 hours.`;
+
+    const mailtoLink = `mailto:${OWNER_EMAIL}`
+      + `?subject=${encodeURIComponent(emailSubject)}`
+      + `&body=${encodeURIComponent(emailBody)}`;
+
+    /* ── 2. WHATSAPP message ─────────────────────────
+       Opens WhatsApp / WhatsApp Web with pre-filled
+       booking summary for the owner's number.         */
+    const waText =
+`🔔 *New Booking — ModernSolutions & Automation*
+
+👤 *Name:* ${fd.fullName}
+📞 *Phone:* ${fd.phone}
+📍 *Location:* ${fd.location}
+🛠️ *Service:* ${fd.serviceType}
+📦 *Plan:* ${fd.plan}
+📅 *Date:* ${fd.preferredDate}
+🕐 *Submitted:* ${fd.submittedAt}
+
+💬 *Message:* ${fd.message}
+
+_Please follow up within 24 hours._`;
+
+    const waLink = `https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(waText)}`;
+
+    // Show success state first, then open both links
+    form.style.display = 'none';
+    successMessage.classList.add('show');
+    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // Small delay so the success screen renders before browser opens external apps
+    setTimeout(() => {
+      // Open WhatsApp in new tab
+      window.open(waLink, '_blank');
+      // Open email client (slight stagger to avoid popup blockers)
+      setTimeout(() => {
+        window.location.href = mailtoLink;
+      }, 800);
+    }, 600);
+  });
+
+  /* ==============================
+     SCROLL ANIMATION — fade-up
+  ============================== */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        // Staggered animation for sibling cards
+        const siblings = entry.target.parentElement.querySelectorAll('.fade-up');
+        let delay = 0;
+        siblings.forEach((sib, i) => {
+          if (sib === entry.target) delay = i * 80;
+        });
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  /* ==============================
+     SMOOTH SCROLL OFFSET FOR FIXED NAV
+  ============================== */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      i
