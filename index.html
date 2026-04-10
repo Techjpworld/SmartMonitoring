@@ -1645,8 +1645,7 @@ footer {
           <div class="success-message" id="successMessage">
             <div class="success-icon">✅</div>
             <h3>Booking Received!</h3>
-            <p>Your booking has been sent to the team via <strong style="color:var(--success);">WhatsApp</strong> and <strong style="color:var(--cyan);">Email</strong>. Our engineer will call you within 24 hours to confirm your slot.</p>
-            <p style="margin-top:10px;font-size:0.78rem;color:var(--text-muted);">If WhatsApp or email didn't open automatically, please allow pop-ups and try again.</p>
+            <p>Thank you! Our engineer will call you within 24 hours to confirm your installation slot. Keep your phone handy.</p>
           </div>
         </div>
       </div>
@@ -1676,7 +1675,7 @@ footer {
       <div class="contact-card fade-up">
         <div class="contact-card-icon">📧</div>
         <h3>Email</h3>
-        <p><a href="/cdn-cgi/l/email-protection#d7bfb2bbbbb897bab8b3b2a5b9a4b8bba2a3beb8b9a4f9beb9"><span class="__cf_email__" data-cfemail="0169646d6d6e416c6e6564736f726e6d7475686e6f722f686f">[email&#160;protected]</span></a></p>
+        <p><a href="mailto:hello@modernsolutions.in">hello@modernsolutions.in</a></p>
         <p style="font-size:0.8rem;color:var(--text-muted);margin-top:6px;">Reply within 4 hours</p>
       </div>
 
@@ -1742,7 +1741,7 @@ footer {
 <!-- ===========================
      JAVASCRIPT
 =========================== -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   /* ==============================
      NAVBAR — Sticky + Hamburger
   ============================== */
@@ -1827,11 +1826,6 @@ footer {
     }
   });
 
-  // ── Configuration ──────────────────────────────────
-  const OWNER_EMAIL    = 'jaylife125@gmail.com';
-  const OWNER_WHATSAPP = '919461267139'; // country code + number, no +
-  // ────────────────────────────────────────────────────
-
   // Form submit
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -1846,88 +1840,33 @@ footer {
     });
 
     if (!isValid) {
+      // Scroll to first error
       const firstError = form.querySelector('.error');
       if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
 
     // Collect form data
-    const fd = {
-      fullName    : document.getElementById('fullName').value.trim(),
-      phone       : document.getElementById('phone').value.trim(),
-      location    : document.getElementById('location').value.trim(),
-      serviceType : document.getElementById('service').value,
-      plan        : document.getElementById('plan').value || 'Not selected',
+    const formData = {
+      fullName: document.getElementById('fullName').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      location: document.getElementById('location').value.trim(),
+      serviceType: document.getElementById('service').value,
+      plan: document.getElementById('plan').value || 'Not selected',
       preferredDate: document.getElementById('date').value,
-      message     : document.getElementById('message').value.trim() || '—',
-      submittedAt : new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+      message: document.getElementById('message').value.trim(),
+      submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
     };
 
+    // Log to console
     console.log('===== NEW BOOKING REQUEST =====');
-    console.table(fd);
+    console.table(formData);
     console.log('================================');
 
-    /* ── 1. EMAIL via mailto ─────────────────────────
-       Opens the user's default mail app pre-filled.
-       Subject + body are URL-encoded automatically.   */
-    const emailSubject = `New Booking: ${fd.serviceType} — ${fd.fullName}`;
-    const emailBody =
-`New booking received from ModernSolutions & Automation website.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  BOOKING DETAILS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Name          : ${fd.fullName}
-Phone         : ${fd.phone}
-Location      : ${fd.location}
-Service Type  : ${fd.serviceType}
-Preferred Plan: ${fd.plan}
-Preferred Date: ${fd.preferredDate}
-Submitted At  : ${fd.submittedAt}
-
-Message:
-${fd.message}
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Please call the customer within 24 hours.`;
-
-    const mailtoLink = `mailto:${OWNER_EMAIL}`
-      + `?subject=${encodeURIComponent(emailSubject)}`
-      + `&body=${encodeURIComponent(emailBody)}`;
-
-    /* ── 2. WHATSAPP message ─────────────────────────
-       Opens WhatsApp / WhatsApp Web with pre-filled
-       booking summary for the owner's number.         */
-    const waText =
-`🔔 *New Booking — ModernSolutions & Automation*
-
-👤 *Name:* ${fd.fullName}
-📞 *Phone:* ${fd.phone}
-📍 *Location:* ${fd.location}
-🛠️ *Service:* ${fd.serviceType}
-📦 *Plan:* ${fd.plan}
-📅 *Date:* ${fd.preferredDate}
-🕐 *Submitted:* ${fd.submittedAt}
-
-💬 *Message:* ${fd.message}
-
-_Please follow up within 24 hours._`;
-
-    const waLink = `https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(waText)}`;
-
-    // Show success state first, then open both links
+    // Show success, hide form
     form.style.display = 'none';
     successMessage.classList.add('show');
     successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-    // Small delay so the success screen renders before browser opens external apps
-    setTimeout(() => {
-      // Open WhatsApp in new tab
-      window.open(waLink, '_blank');
-      // Open email client (slight stagger to avoid popup blockers)
-      setTimeout(() => {
-        window.location.href = mailtoLink;
-      }, 800);
-    }, 600);
   });
 
   /* ==============================
@@ -1958,4 +1897,15 @@ _Please follow up within 24 hours._`;
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const target = document.querySelector(this.getAttribute('href'));
-      i
+      if (target) {
+        e.preventDefault();
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
