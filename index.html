@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ModernSolutions & Automation | Smart Industrial Monitoring</title>
+<title>ModernSolutions & Automation | Smart Industrial Monitoring & Custom Development</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
@@ -22,7 +22,8 @@
       </a>
       <ul class="nav-menu">
         <li><a href="#hero">Home</a></li>
-        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#development">Development</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#book" class="nav-cta">Book Now</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -37,7 +38,8 @@
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#hero" onclick="closeMobileMenu()">Home</a>
-  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#products" onclick="closeMobileMenu()">Products</a>
+  <a href="#development" onclick="closeMobileMenu()">Development</a>
   <a href="#pricing" onclick="closeMobileMenu()">Pricing</a>
   <a href="#book" onclick="closeMobileMenu()">Book Now</a>
   <a href="#contact" onclick="closeMobileMenu()">Contact</a>
@@ -53,20 +55,20 @@
       <div class="hero-content">
         <div class="hero-badge">
           <span class="hero-badge-dot"></span>
-          ARM-Based IoT Platform — Live Monitoring
+          ARM-Based IoT Platform — Live Monitoring & Custom Development
         </div>
         <h1 class="hero-title">
-          Monitor Your Water Tanks, Motors &amp; <span class="highlight">Energy</span> in Real-Time
+          Monitor Your Systems & Build <span class="highlight">Custom Solutions</span>
         </h1>
         <p class="hero-subtitle">
-          ARM-based automation system with real-time alerts, cloud dashboard, and remote control — built for homes, industries, and farms.
+          Complete industrial IoT ecosystem: ready-made monitoring systems + custom firmware development for ESP32, STM32, Android, Linux & Windows. Enterprise-grade reliability with 24/7 support.
         </p>
         <div class="hero-actions">
           <a href="#book" class="btn btn-primary">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
-            Book Installation
+            Get Started Today
           </a>
-          <a href="#services" class="btn btn-outline">
+          <a href="#products" class="btn btn-outline">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12h6M12 9v6M12 3a9 9 0 100 18A9 9 0 0012 3z"/></svg>
             Explore Services
           </a>
@@ -74,15 +76,15 @@
         <div class="hero-stats">
           <div class="hero-stat">
             <div class="hero-stat-num">200<span>+</span></div>
-            <div class="hero-stat-label">Systems Installed</div>
+            <div class="hero-stat-label">Systems Deployed</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">50<span>+</span></div>
+            <div class="hero-stat-label">Custom Projects</div>
           </div>
           <div class="hero-stat">
             <div class="hero-stat-num">99<span>%</span></div>
-            <div class="hero-stat-label">Uptime Guaranteed</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num">24<span>/7</span></div>
-            <div class="hero-stat-label">Support Available</div>
+            <div class="hero-stat-label">Uptime SLA</div>
           </div>
         </div>
       </div>
@@ -141,18 +143,19 @@
 </section>
 
 <!-- ===========================
-     SERVICES
+     PRODUCTS (CORE SERVICES)
 =========================== -->
-<section id="services">
+<section id="products">
   <div class="container">
     <div class="services-header fade-up">
-      <div class="section-tag">What We Offer</div>
-      <h2 class="section-title">Industrial-Grade Monitoring Services</h2>
-      <p class="section-subtitle">ARM & PLC-based IoT solutions tailored for your specific needs — from single installations to full site automation.</p>
+      <div class="section-tag">Core Products</div>
+      <h2 class="section-title">Ready-to-Deploy IoT Solutions</h2>
+      <p class="section-subtitle">Plug-and-play monitoring systems optimized for water, power, and industrial applications. Deploy in days, not months.</p>
     </div>
     <div class="services-grid">
 
       <div class="service-card fade-up">
+        <div class="service-badge">Most Popular</div>
         <div class="service-icon">💧</div>
         <h3 class="service-name">Water Tank Monitoring</h3>
         <p class="service-desc">Real-time ultrasonic level sensing for overhead/underground tanks. Auto motor control with overflow protection and SMS/app alerts.</p>
@@ -193,6 +196,137 @@
 </section>
 
 <!-- ===========================
+     DEVELOPMENT SERVICES
+=========================== -->
+<section id="development">
+  <div class="container">
+    <div class="services-header fade-up">
+      <div class="section-tag">Custom Development</div>
+      <h2 class="section-title">Firmware & Software Engineering</h2>
+      <p class="section-subtitle">Full-stack development for embedded systems and cross-platform applications. From concept to production-ready code.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card fade-up">
+        <div class="service-icon">🔷</div>
+        <h3 class="service-name">ESP32 Firmware Development</h3>
+        <p class="service-desc">Custom ESP-IDF firmware for WiFi/BLE IoT applications. Rapid prototyping, cloud connectivity, and sensor integration.</p>
+        <ul class="service-features">
+          <li class="service-feature">ESP-IDF & Arduino framework expertise</li>
+          <li class="service-feature">WiFi, BLE, LoRaWan connectivity</li>
+          <li class="service-feature">OTA updates & remote management</li>
+          <li class="service-feature">MQTT/HTTP cloud integration</li>
+          <li class="service-feature">Low-power modes & battery optimization</li>
+        </ul>
+        <div class="service-tag">Popular</div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">🔶</div>
+        <h3 class="service-name">STM32 Bare-Metal Development</h3>
+        <p class="service-desc">Industrial-grade bare-metal & RTOS firmware for high-reliability systems. CAN, Modbus, real-time control.</p>
+        <ul class="service-features">
+          <li class="service-feature">STM32F1/F4/G0/H7 series support</li>
+          <li class="service-feature">Bare-metal, FreeRTOS, ThreadX</li>
+          <li class="service-feature">CAN bus, Modbus, industrial protocols</li>
+          <li class="service-feature">PWM/ADC/Timer precision control</li>
+          <li class="service-feature">Safety-critical certification ready</li>
+        </ul>
+        <div class="service-tag">Industrial</div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">📱</div>
+        <h3 class="service-name">Custom Android Apps</h3>
+        <p class="service-desc">Native Android applications for IoT dashboards, real-time monitoring, and remote control. Kotlin & Java, Material Design.</p>
+        <ul class="service-features">
+          <li class="service-feature">Real-time data visualization & charts</li>
+          <li class="service-feature">Push notifications & SMS integration</li>
+          <li class="service-feature">Offline-first architecture</li>
+          <li class="service-feature">Cloud backend integration</li>
+          <li class="service-feature">Google Play Store deployment</li>
+        </ul>
+        <div class="service-tag">Mobile-First</div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">🐧</div>
+        <h3 class="service-name">Linux Desktop Apps</h3>
+        <p class="service-desc">Cross-platform desktop applications for Ubuntu, Debian, Raspberry Pi. Qt6, Python, native performance.</p>
+        <ul class="service-features">
+          <li class="service-feature">Qt6 QML modern UI frameworks</li>
+          <li class="service-feature">System daemon & background services</li>
+          <li class="service-feature">Hardware integration & GPIO control</li>
+          <li class="service-feature">Database connectivity (PostgreSQL, SQLite)</li>
+          <li class="service-feature">Standalone executable distribution</li>
+        </ul>
+        <div class="service-tag">Advanced</div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">🪟</div>
+        <h3 class="service-name">Windows Desktop Apps</h3>
+        <p class="service-desc">Professional Windows applications for industrial automation HMIs and control software. .NET, C++, enterprise integration.</p>
+        <ul class="service-features">
+          <li class="service-feature">WPF & WinForms UI development</li>
+          <li class="service-feature">.NET 6+ framework, C# optimization</li>
+          <li class="service-feature">COM/Serial/USB hardware drivers</li>
+          <li class="service-feature">SQL Server & database integration</li>
+          <li class="service-feature">NSIS installer & auto-updater</li>
+        </ul>
+        <div class="service-tag">Enterprise</div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">🔧</div>
+        <h3 class="service-name">Full-Stack IoT Solutions</h3>
+        <p class="service-desc">End-to-end development: firmware + backend API + web/mobile dashboard. Turnkey systems with zero integration headaches.</p>
+        <ul class="service-features">
+          <li class="service-feature">Microcontroller firmware (ESP32/STM32)</li>
+          <li class="service-feature">Cloud backend (Node.js, Python, AWS/GCP)</li>
+          <li class="service-feature">Web dashboard (React, Vue, Angular)</li>
+          <li class="service-feature">Mobile apps (iOS/Android native)</li>
+          <li class="service-feature">24/7 monitoring & maintenance</li>
+        </ul>
+        <div class="service-tag">Complete</div>
+      </div>
+
+    </div>
+
+    <!-- Technology Stack -->
+    <div class="tech-stack fade-up">
+      <h3 class="tech-stack-title">Our Technology Stack</h3>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <span class="tech-label">Microcontrollers</span>
+          <span class="tech-tags">ESP32 • STM32 • Arduino • nRF52</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">Embedded OS</span>
+          <span class="tech-tags">ESP-IDF • FreeRTOS • Bare-metal • ThreadX</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">Mobile</span>
+          <span class="tech-tags">Android (Kotlin/Java) • iOS • React Native</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">Desktop</span>
+          <span class="tech-tags">Qt6 • .NET • WPF • Python Qt</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">Backend</span>
+          <span class="tech-tags">Node.js • Python • AWS • GCP • Azure</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">Protocols</span>
+          <span class="tech-tags">MQTT • Modbus • CAN • HTTP/HTTPS • BLE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
      PRICING
 =========================== -->
 <section id="pricing">
@@ -200,61 +334,139 @@
     <div class="pricing-header fade-up">
       <div class="section-tag">Transparent Pricing</div>
       <h2 class="section-title">Choose Your Plan</h2>
-      <p class="section-subtitle">Simple one-time setup fee + low monthly subscription. No hidden charges, no long contracts.</p>
+      <p class="section-subtitle">Simple pricing for products & development. Subscriptions are optional — pay only for what you use.</p>
     </div>
-    <div class="pricing-grid">
 
-      <!-- Basic -->
-      <div class="pricing-card fade-up">
-        <div class="plan-name">Basic Plan</div>
-        <div class="plan-setup"><span class="rupee">₹</span>3,000</div>
-        <div class="plan-setup-label">One-time setup fee</div>
-        <div class="plan-monthly">+ ₹500 / month</div>
-        <ul class="plan-features">
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> 1 Water Tank Sensor</li>
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Basic Mobile Dashboard</li>
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> WhatsApp Alerts</li>
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Auto Motor Control</li>
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Email Support</li>
-        </ul>
-        <a href="#book" class="btn btn-outline" style="width:100%;justify-content:center;">Get Started</a>
+    <!-- Product Plans -->
+    <div class="pricing-section">
+      <h3 class="pricing-category-title fade-up">IoT Monitoring Products</h3>
+      <div class="pricing-grid">
+
+        <!-- Basic -->
+        <div class="pricing-card fade-up">
+          <div class="plan-name">Basic Plan</div>
+          <div class="plan-setup"><span class="rupee">₹</span>3,000</div>
+          <div class="plan-setup-label">One-time setup fee</div>
+          <div class="plan-monthly">+ ₹500 / month</div>
+          <ul class="plan-features">
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> 1 Water Tank Sensor</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Basic Mobile Dashboard</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> WhatsApp Alerts</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Auto Motor Control</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Email Support</li>
+          </ul>
+          <a href="#book" class="btn btn-outline" style="width:100%;justify-content:center;">Get Started</a>
+        </div>
+
+        <!-- Standard (Featured) -->
+        <div class="pricing-card featured fade-up">
+          <div class="plan-name">Standard Plan</div>
+          <div class="plan-setup"><span class="rupee">₹</span>5,000</div>
+          <div class="plan-setup-label">One-time setup fee</div>
+          <div class="plan-monthly">+ ₹1,000 / month</div>
+          <ul class="plan-features">
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Tank + Motor Monitoring</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Cloud Dashboard (Web + App)</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> SMS + WhatsApp + App Alerts</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Energy Usage Reports</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Priority Phone Support</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Monthly Health Reports</li>
+          </ul>
+          <a href="#book" class="btn btn-primary" style="width:100%;justify-content:center;">Get Started</a>
+        </div>
+
+        <!-- Premium -->
+        <div class="pricing-card fade-up">
+          <div class="plan-name">Premium Plan</div>
+          <div class="plan-setup"><span class="rupee">₹</span>8,000</div>
+          <div class="plan-setup-label">One-time setup fee</div>
+          <div class="plan-monthly">+ ₹1,500 / month</div>
+          <ul class="plan-features">
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Full System (Tank+Motor+Energy)</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Custom Automation Rules</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Multi-Site Management</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Predictive Maintenance AI</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> 24/7 Dedicated Support</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> On-Site Quarterly Service</li>
+          </ul>
+          <a href="#book" class="btn btn-outline" style="width:100%;justify-content:center;">Get Started</a>
+        </div>
+
       </div>
-
-      <!-- Standard (Featured) -->
-      <div class="pricing-card featured fade-up">
-        <div class="plan-name">Standard Plan</div>
-        <div class="plan-setup"><span class="rupee">₹</span>5,000</div>
-        <div class="plan-setup-label">One-time setup fee</div>
-        <div class="plan-monthly">+ ₹1,000 / month</div>
-        <ul class="plan-features">
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Tank + Motor Monitoring</li>
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Cloud Dashboard (Web + App)</li>
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> SMS + WhatsApp + App Alerts</li>
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Energy Usage Reports</li>
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Priority Phone Support</li>
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Monthly Health Reports</li>
-        </ul>
-        <a href="#book" class="btn btn-primary" style="width:100%;justify-content:center;">Get Started</a>
-      </div>
-
-      <!-- Premium -->
-      <div class="pricing-card fade-up">
-        <div class="plan-name">Premium Plan</div>
-        <div class="plan-setup"><span class="rupee">₹</span>8,000</div>
-        <div class="plan-setup-label">One-time setup fee</div>
-        <div class="plan-monthly">+ ₹1,500 / month</div>
-        <ul class="plan-features">
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Full System (Tank+Motor+Energy)</li>
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Custom Automation Rules</li>
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Multi-Site Management</li>
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Predictive Maintenance AI</li>
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> 24/7 Dedicated Support</li>
-          <li class="plan-feature"><span class="plan-feature-icon">✓</span> On-Site Quarterly Service</li>
-        </ul>
-        <a href="#book" class="btn btn-outline" style="width:100%;justify-content:center;">Get Started</a>
-      </div>
-
     </div>
+
+    <!-- Development Plans -->
+    <div class="pricing-section fade-up">
+      <h3 class="pricing-category-title">Custom Development Services</h3>
+      <p class="pricing-category-subtitle">Flexible engagement models for custom firmware and software projects</p>
+      <div class="pricing-grid">
+
+        <!-- Embedded Firmware -->
+        <div class="pricing-card fade-up">
+          <div class="plan-name">Embedded Firmware</div>
+          <div class="plan-setup"><span class="rupee">₹</span>25,000<span style="font-size:0.7em;">+</span></div>
+          <div class="plan-setup-label">Starting price for project</div>
+          <ul class="plan-features">
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> ESP32 or STM32 custom firmware</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Protocol integration (MQTT, Modbus)</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Hardware drivers & peripheral control</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> OTA updates & version management</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> 3 months free updates & support</li>
+          </ul>
+          <a href="#book" class="btn btn-outline" style="width:100%;justify-content:center;">Inquire</a>
+        </div>
+
+        <!-- Mobile App Development -->
+        <div class="pricing-card featured fade-up">
+          <div class="plan-name">Mobile App Development</div>
+          <div class="plan-setup"><span class="rupee">₹</span>50,000<span style="font-size:0.7em;">+</span></div>
+          <div class="plan-setup-label">Starting price for project</div>
+          <ul class="plan-features">
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Native Android app (Kotlin)</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Real-time dashboard & charts</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Push notifications & offline data</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Google Play Store deployment</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> 6 months free updates & support</li>
+          </ul>
+          <a href="#book" class="btn btn-primary" style="width:100%;justify-content:center;">Inquire</a>
+        </div>
+
+        <!-- Desktop App Development -->
+        <div class="pricing-card fade-up">
+          <div class="plan-name">Desktop App Development</div>
+          <div class="plan-setup"><span class="rupee">₹</span>40,000<span style="font-size:0.7em;">+</span></div>
+          <div class="plan-setup-label">Starting price for project</div>
+          <ul class="plan-features">
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Windows (.NET/WPF) or Linux (Qt6)</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Hardware integration & serial/USB</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Database connectivity</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Installer & auto-updater</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> 6 months free updates & support</li>
+          </ul>
+          <a href="#book" class="btn btn-outline" style="width:100%;justify-content:center;">Inquire</a>
+        </div>
+
+        <!-- Full-Stack IoT -->
+        <div class="pricing-card fade-up">
+          <div class="plan-name">Full-Stack IoT Solution</div>
+          <div class="plan-setup"><span class="rupee">₹</span>1,50,000<span style="font-size:0.7em;">+</span></div>
+          <div class="plan-setup-label">Starting price for project</div>
+          <ul class="plan-features">
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Firmware + Cloud Backend + Dashboard</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Web & mobile apps included</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> API documentation & training</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> Deployment & DevOps setup</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span> 12 months free updates & support</li>
+          </ul>
+          <a href="#book" class="btn btn-outline" style="width:100%;justify-content:center;">Inquire</a>
+        </div>
+
+      </div>
+      <div class="pricing-note fade-up">
+        <p><strong>💡 Note:</strong> Development services are quoted based on project scope, complexity, and timeline. Contact us for a detailed proposal after booking a consultation.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -266,36 +478,36 @@
     <div class="book-inner">
       <!-- Left: Info -->
       <div class="book-info fade-up">
-        <div class="section-tag">Book Installation</div>
-        <h2 class="section-title">Schedule Your Installation Today</h2>
-        <p class="section-subtitle" style="margin-bottom:40px;">Fill in your details and our engineer will get in touch within 24 hours to confirm your slot.</p>
+        <div class="section-tag">Book Consultation</div>
+        <h2 class="section-title">Schedule Your Consultation</h2>
+        <p class="section-subtitle" style="margin-bottom:40px;">Whether you need a ready-made product or custom development, let's discuss your project. Our engineer will get in touch within 24 hours.</p>
 
         <div class="book-info-item">
           <div class="book-info-icon">📍</div>
           <div class="book-info-text">
-            <h4>On-Site Installation</h4>
-            <p>Our certified engineers visit your location for a clean, professional setup.</p>
+            <h4>Free Consultation</h4>
+            <p>We understand your requirements and recommend the right solution.</p>
           </div>
         </div>
         <div class="book-info-item">
           <div class="book-info-icon">🔧</div>
           <div class="book-info-text">
-            <h4>Free Commissioning</h4>
-            <p>We test and commission the entire system before we leave.</p>
+            <h4>Expert Assessment</h4>
+            <p>Technical evaluation of your project scope and feasibility.</p>
           </div>
         </div>
         <div class="book-info-item">
-          <div class="book-info-icon">📱</div>
+          <div class="book-info-icon">📋</div>
           <div class="book-info-text">
-            <h4>App Onboarding Included</h4>
-            <p>We set up your mobile dashboard and walk you through usage.</p>
+            <h4>Detailed Quote</h4>
+            <p>Transparent pricing with timeline and deliverables breakdown.</p>
           </div>
         </div>
         <div class="book-info-item">
-          <div class="book-info-icon">🛡️</div>
+          <div class="book-info-icon">🚀</div>
           <div class="book-info-text">
-            <h4>6-Month Hardware Warranty</h4>
-            <p>All ARM controller units and sensors covered against hardware defects.</p>
+            <h4>Rapid Development</h4>
+            <p>Agile methodology with regular updates and milestones.</p>
           </div>
         </div>
       </div>
@@ -303,8 +515,8 @@
       <!-- Right: Form -->
       <div class="fade-up">
         <div class="booking-form">
-          <h3 class="form-title">Book Your Slot</h3>
-          <p class="form-subtitle">All fields marked * are required. We'll confirm via call/WhatsApp.</p>
+          <h3 class="form-title">Book Your Consultation</h3>
+          <p class="form-subtitle">All fields marked * are required. We'll confirm via call/WhatsApp within 24 hours.</p>
 
           <form id="bookingForm" novalidate>
             <div class="form-grid">
@@ -322,57 +534,74 @@
               </div>
 
               <div class="form-group">
-                <label for="location">City / Village *</label>
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="your.email@example.com">
+                <span class="error-msg" id="email-error">Please enter a valid email.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="location">City / Company *</label>
                 <input type="text" id="location" name="location" placeholder="e.g. Patna, Bihar" required>
                 <span class="error-msg" id="location-error">Please enter your location.</span>
               </div>
 
               <div class="form-group">
-                <label for="service">Service Type *</label>
-                <select id="service" name="service" required>
-                  <option value="">— Select a service —</option>
-                  <option value="Tank Monitoring">Water Tank Monitoring</option>
-                  <option value="Motor Monitoring">Motor Health Monitoring</option>
-                  <option value="Energy Tracking">Energy Usage Tracking</option>
-                  <option value="Full Package">Full Package (All 3)</option>
+                <label for="serviceType">Project Type *</label>
+                <select id="serviceType" name="serviceType" required>
+                  <option value="">— Select project type —</option>
+                  <optgroup label="Ready-Made Products">
+                    <option value="Tank Monitoring">Water Tank Monitoring</option>
+                    <option value="Motor Monitoring">Motor Health Monitoring</option>
+                    <option value="Energy Tracking">Energy Usage Tracking</option>
+                    <option value="Full Package">Full Package (All 3)</option>
+                  </optgroup>
+                  <optgroup label="Custom Development">
+                    <option value="ESP32 Firmware">Custom ESP32 Firmware</option>
+                    <option value="STM32 Firmware">Custom STM32 Development</option>
+                    <option value="Android App">Custom Android App</option>
+                    <option value="Linux App">Linux Desktop App</option>
+                    <option value="Windows App">Windows Desktop App</option>
+                    <option value="Full-Stack">Full-Stack IoT Solution</option>
+                  </optgroup>
                 </select>
-                <span class="error-msg" id="service-error">Please select a service type.</span>
+                <span class="error-msg" id="serviceType-error">Please select a project type.</span>
               </div>
 
               <div class="form-group">
-                <label for="date">Preferred Date *</label>
-                <input type="date" id="date" name="date" required>
-                <span class="error-msg" id="date-error">Please select a preferred date.</span>
-              </div>
-
-              <div class="form-group">
-                <label for="plan">Preferred Plan</label>
-                <select id="plan" name="plan">
-                  <option value="">— Select a plan (optional) —</option>
-                  <option value="Basic">Basic — ₹3000 + ₹500/mo</option>
-                  <option value="Standard">Standard — ₹5000 + ₹1000/mo</option>
-                  <option value="Premium">Premium — ₹8000 + ₹1500/mo</option>
+                <label for="budget">Budget Range (Optional)</label>
+                <select id="budget" name="budget">
+                  <option value="">— Select budget range —</option>
+                  <option value="Under 50k">Under ₹50,000</option>
+                  <option value="50k-1L">₹50,000 - ₹1,00,000</option>
+                  <option value="1L-5L">₹1,00,000 - ₹5,00,000</option>
+                  <option value="5L+">₹5,00,000+</option>
                 </select>
               </div>
 
               <div class="form-group full">
-                <label for="message">Additional Message</label>
-                <textarea id="message" name="message" placeholder="Tell us about your setup, any special requirements, number of tanks/motors, site size, etc."></textarea>
+                <label for="description">Project Description *</label>
+                <textarea id="description" name="description" placeholder="Describe your project in detail — what problem are you solving? What are the key requirements? How many sensors/devices involved?" required></textarea>
+                <span class="error-msg" id="description-error">Please describe your project.</span>
+              </div>
+
+              <div class="form-group full">
+                <label for="timeline">Timeline / Urgency (Optional)</label>
+                <input type="text" id="timeline" name="timeline" placeholder="e.g. ASAP, within 3 months, flexible">
               </div>
 
             </div>
 
             <button type="submit" class="btn btn-primary btn-submit">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
-              Book Now — Confirm My Slot
+              Send Inquiry — Get Proposal
             </button>
           </form>
 
           <!-- Success Message -->
           <div class="success-message" id="successMessage">
             <div class="success-icon">✅</div>
-            <h3>Booking Received!</h3>
-            <p>Thank you! Our engineer will call you within 24 hours to confirm your installation slot. Keep your phone handy.</p>
+            <h3>Inquiry Received!</h3>
+            <p>Thank you! Our team will review your project and get back to you within 24 hours with a detailed proposal. Check your email and phone for our response.</p>
           </div>
         </div>
       </div>
@@ -387,8 +616,8 @@
   <div class="container">
     <div class="fade-up" style="text-align:center;">
       <div class="section-tag" style="justify-content:center;">Get In Touch</div>
-      <h2 class="section-title">We're Here to Help</h2>
-      <p class="section-subtitle" style="margin:0 auto 0;">Questions before booking? Reach out via call, email, or WhatsApp — we respond fast.</p>
+      <h2 class="section-title">Questions? We're Here to Help</h2>
+      <p class="section-subtitle" style="margin:0 auto 0;">Reach out via call, email, or WhatsApp — we respond fast.</p>
     </div>
     <div class="contact-grid">
 
@@ -396,7 +625,7 @@
         <div class="contact-card-icon">📞</div>
         <h3>Phone</h3>
         <p><a href="tel:+919461267139">+91 9461267139</a></p>
-        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:6px;">Mon–Sat, 9am – 6pm</p>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:6px;">Mon–Sat, 9am – 6pm IST</p>
       </div>
 
       <div class="contact-card fade-up">
@@ -410,7 +639,7 @@
         <div class="contact-card-icon">💬</div>
         <h3>WhatsApp</h3>
         <p style="margin-bottom:14px;color:var(--text-muted);font-size:0.88rem;">Chat with us instantly</p>
-        <a href="https://wa.me/919999999999?text=Hi%2C%20I%20want%20to%20book%20an%20installation%20for%20Smart%20Monitor%20system." target="_blank" class="whatsapp-btn">
+        <a href="https://wa.me/919461267139?text=Hi%2C%20I%27m%20interested%20in%20your%20IoT%20solutions%20and%20custom%20development%20services." target="_blank" class="whatsapp-btn">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.553 4.116 1.524 5.84L.057 23.273a.75.75 0 00.92.92l5.436-1.469A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.745 9.745 0 01-4.97-1.361l-.358-.212-3.707 1.003.976-3.619-.232-.374A9.75 9.75 0 1112 21.75z"/></svg>
           Chat on WhatsApp
         </a>
@@ -431,37 +660,44 @@
           <span class="nav-logo-main">Modern<span class="accent">Solutions</span></span>
           <span class="nav-logo-sub">&amp; Automation</span>
         </div>
-        <p>Delivering intelligent ARM & PLC-based IoT monitoring systems for water, power, and industrial automation across India.</p>
+        <p>Full-stack IoT solutions & custom embedded systems development. From industrial monitoring to complete IoT platforms — built for reliability and scale.</p>
       </div>
       <div class="footer-col">
-        <h4>Quick Links</h4>
+        <h4>Products</h4>
         <ul class="footer-links">
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="#book">Book Now</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#products">Tank Monitoring</a></li>
+          <li><a href="#products">Motor Health</a></li>
+          <li><a href="#products">Energy Tracking</a></li>
+          <li><a href="#pricing">View Pricing</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4>Development</h4>
         <ul class="footer-links">
-          <li><a href="#services">Tank Monitoring</a></li>
-          <li><a href="#services">Motor Health</a></li>
-          <li><a href="#services">Energy Tracking</a></li>
-          <li><a href="#pricing">View Pricing</a></li>
+          <li><a href="#development">ESP32 Firmware</a></li>
+          <li><a href="#development">STM32 Development</a></li>
+          <li><a href="#development">Mobile & Desktop Apps</a></li>
+          <li><a href="#book">Get Quote</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#book">Book Consultation</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p class="footer-copyright">© 2025 ModernSolutions &amp; Automation. All rights reserved.</p>
-      <p class="footer-tech">Powered by <span>ARM · PLC · Cloud IoT</span></p>
+      <p class="footer-tech">Expertise in: ESP32 • STM32 • Android • Qt • .NET • Cloud IoT • Modbus • CAN</p>
     </div>
   </div>
 </footer>
 
 <!-- Floating WhatsApp Button -->
-<a href="https://wa.me/919461267139?text=Hi%2C%20I%27m%20interested%20in%20your%20Smart%20Monitor%20installation%20service." target="_blank" class="float-whatsapp" title="Chat on WhatsApp">
+<a href="https://wa.me/919461267139?text=Hi%2C%20I%27m%20interested%20in%20ModernSolutions%20IoT%20solutions%20and%20custom%20development." target="_blank" class="float-whatsapp" title="Chat on WhatsApp">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.553 4.116 1.524 5.84L.057 23.273a.75.75 0 00.92.92l5.436-1.469A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.745 9.745 0 01-4.97-1.361l-.358-.212-3.707 1.003.976-3.619-.232-.374A9.75 9.75 0 1112 21.75z"/></svg>
 </a>
 
